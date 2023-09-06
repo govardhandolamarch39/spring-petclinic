@@ -1,0 +1,29 @@
+pipeline {
+    agent { label 'JDK_17' }
+    trigger { cron ('H/15 * * * *') }
+    parameters {
+        choice(name: 'MAVEN_GOAL', choices:  ['package', 'install', 'clean'] , description: 'Maven_Goal' )
+    }
+    stages {  
+        stage('vcs') {
+            steps {
+            git url: 'https://github.com/khajadevopsmarch23/spring-petclinic.git',
+                branch: 'main'
+            }
+        }    
+        stage{'package'} {
+            tools {
+                jdk 'JDK_17'
+            steps {
+                sh "mvn ${params.MAVEN_GOAL}"
+                         }
+        }
+        stage('post build') {
+            steps {    
+                archiveArtifacts artifacts: '**/target/gameoflife.war',
+                                 onlyIfSuccessful: true
+                junit testResults: '**/surefire-reports/TEST*-.xml',
+                }
+            }
+        }
+    }            
