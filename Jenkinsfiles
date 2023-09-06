@@ -1,8 +1,8 @@
 pipeline {
     agent { label 'JDK_17' }
-    trigger { pollSCM ('* * * * *') }
+    triggers { pollSCM ('* * * * *') }
     parameters {
-        choice(name: 'MAVEN_GOAL', choices:  ['package', 'install', 'clean'] , description: 'Maven_Goal' )
+        choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'] , description: 'Maven_Goal' )
     }
     stages {  
         stage('vcs') {
