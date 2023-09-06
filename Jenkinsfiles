@@ -20,9 +20,11 @@ pipeline {
             }
         }
         stage('post build') {
-            archiveArtifacts artifacts: '**/target/spring-petclinic'
-                             onlyIfSuccessful: true
-            junit testResults: '**/surefire-reports/TEST-*.xml'                 
+            steps { 
+                archiveArtifacts artifacts: '**/target/spring-petclinic'
+                                  onlyIfSuccessful: true
+                junit testResults: '**/surefire-reports/TEST-*.xml'                 
+            }
         }
     }
-}    
+}        
