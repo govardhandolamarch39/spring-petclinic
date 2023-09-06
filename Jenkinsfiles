@@ -1,13 +1,13 @@
 pipeline {
     agent { label 'JDK_17' }
-    trigger { cron ('H/15 * * * *') }
+    trigger { pollSCM ('* * * * *') }
     parameters {
         choice(name: 'MAVEN_GOAL', choices:  ['package', 'install', 'clean'] , description: 'Maven_Goal' )
     }
     stages {  
         stage('vcs') {
             steps {
-            git url: 'https://github.com/khajadevopsmarch23/spring-petclinic.git',
+            git url: 'https://github.com/govardhandolamarch39/spring-petclinic.git',
                 branch: 'main'
             }
         }    
