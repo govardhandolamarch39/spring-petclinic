@@ -15,7 +15,7 @@ pipeline {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: 'https://qtkhajamarch23.jfrog.io/artifactory',
+                    url: 'https://github.com/govardhandolamarch39.jfrog.io',
                     credentialsId: 'JFROG_CLOUD_ADMIN'
                 )
 
