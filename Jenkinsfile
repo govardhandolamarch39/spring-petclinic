@@ -11,13 +11,12 @@ pipeline {
                     branch: 'dev'
             }
         }
-        stage ('Artifactory configuration') {
-            steps {
         stage('package') {
             tools {
                 jdk 'JDK_17'
             }
             steps {
+                sh "mvn clean"
                 sh "mvn ${params.MAVEN_GOAL}"
             }
         }
